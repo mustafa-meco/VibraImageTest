@@ -5,11 +5,18 @@ from simple_fq_modularized import generate_vibraimages
 
 
 def main():
-    operation_type = input("Choose you need camera or video: ")
-    if operation_type == "camera":
+    print("Welcome to VibraTest!")
+    print("1. Camera")
+    print("2. Video")
+
+    operation_type = int(input("Choose you need camera or video (1, 2): "))
+    if operation_type == 1:
         video_path = 0
-    else:
+    elif operation_type == 2:
         video_path = input("Enter the video path: ")
+    else:
+        print("Invalid operation type!")
+        exit()
 
     num_frames = int(input("Enter the number of frames: "))
     print("Capturing frames...")
@@ -46,6 +53,9 @@ def main():
                 exit()
             amplitude_vibraimage = generate_amplitude_vibraimage(preprocessed_frames)
             frequency_vibraimage = generate_frequency_vibraimage(preprocessed_frames)
+        else:
+            print("Invalid analysis type!")
+            exit()
         print("Analysis complete!")
         print("Extracting features...")
         amplitude_hist, frequency_hist = extract_features(amplitude_vibraimage, frequency_vibraimage)
