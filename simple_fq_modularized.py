@@ -1,6 +1,3 @@
-
-import numpy as np
-
 from vibra_utils import *
 
 def generate_vibraimages(frames):
