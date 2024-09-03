@@ -26,7 +26,7 @@ cv2.destroyAllWindows()
 # illumination correction, etc., here.
 
 # --- 3. Vibraimage Generation ---
-# Amplitude Vibraimage (Eq. 1 from source)
+# Amplitude Vibraimage (Eq. 1 from paper)
 amplitude_vibraimage = np.zeros_like(frames[0], dtype=np.float32)
 for i in range(1, len(frames)):
     amplitude_vibraimage += np.abs(frames[i].astype(np.float32) - frames[i - 1].astype(np.float32))
