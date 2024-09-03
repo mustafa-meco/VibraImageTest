@@ -1,8 +1,6 @@
 import cv2
-
 from vibra_utils import *
-from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage
-
+from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage, preprocess_frames
 
 
 def load_face_detector():
@@ -65,13 +63,13 @@ def preprocess_faces(face_rois):
   min_height = min(frame.shape[0] for frame in face_rois)
   min_width = min(frame.shape[1] for frame in face_rois)
   preprocessed_faces = [cv2.resize(frame, (min_width, min_height)) for frame in face_rois]
-  return np.array(preprocessed_faces, dtype=np.float32)
+  return preprocess_frames(preprocessed_faces)
 
 
 def main():
   video_path = "Videos/00.mp4"  # Replace with your video path or 0 for webcam
   face_cascade = load_face_detector()
-  frames = capture_frames(video_path)
+  frames = capture_frames(video_path, num_frames=30)
   face_frames = []
   if not frames:
     print("No frames captured!")

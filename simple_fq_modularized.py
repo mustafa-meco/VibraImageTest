@@ -25,7 +25,7 @@ def generate_vibraimages(frames):
 
 def main():
     video_path = "Videos/00.mp4"  # Replace with your video path or 0 for webcam
-    frames = capture_frames(video_path)
+    frames = capture_frames(video_path, num_frames=30)
     if frames:
         amplitude_vibraimage, frequency_vibraimage = generate_vibraimages(frames)
         amplitude_hist, frequency_hist = extract_features(amplitude_vibraimage, frequency_vibraimage)
