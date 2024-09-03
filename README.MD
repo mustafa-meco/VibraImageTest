@@ -12,7 +12,7 @@ This project demonstrates various techniques for generating and visualizing vibr
 
 Install the required packages using pip:
 
-```sh
+``` sh
 pip install opencv-python numpy matplotlib
 ```
 
