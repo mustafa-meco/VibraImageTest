@@ -1,6 +1,7 @@
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 def capture_frames(video_path, num_frames=30):
     """
@@ -81,3 +82,36 @@ def visualize_results(frames, amplitude_vibraimage, frequency_vibraimage, amplit
 
     plt.tight_layout()
     plt.show()
+
+def save_results(amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist, output_prefix="output"):
+    """
+    Saves vibraimages and histograms to files.
+
+    Args:
+        amplitude_vibraimage (numpy.ndarray): Amplitude vibraimage.
+        frequency_vibraimage (numpy.ndarray): Frequency vibraimage.
+        amplitude_hist (numpy.ndarray): Amplitude histogram.
+        frequency_hist (numpy.ndarray): Frequency histogram.
+        output_prefix (str, optional): Prefix for output files. Defaults to "output".
+    """
+
+    os.makedirs(f"saved_results/{output_prefix}", exist_ok=True)
+    # if folder exist print warning
+    if os.path.exists(f"saved_results/{output_prefix}"):
+        print("Warning: Folder already exists. Files will be overwritten.")
+        agree = input("Do you want to continue? (y/n): ")
+        if agree.lower() != 'y':
+            print("Operation cancelled.")
+            return
+
+    folder = f"saved_results/{output_prefix}"
+
+    # Save vibraimages
+    cv2.imwrite(f"{folder}/{output_prefix}_amplitude.png", amplitude_vibraimage)
+    cv2.imwrite(f"{folder}/{output_prefix}_frequency.png", frequency_vibraimage)
+
+    # Save histograms
+    np.save(f"{folder}/{output_prefix}_amplitude_hist.npy", amplitude_hist)
+    np.save(f"{folder}/{output_prefix}_frequency_hist.npy", frequency_hist)
+
+    print(f"Results saved with prefix '{output_prefix}'.")

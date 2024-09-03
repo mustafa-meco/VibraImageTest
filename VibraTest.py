@@ -1,4 +1,4 @@
-from vibra_utils import *
+from vibra_utils import capture_frames, extract_features, visualize_results, save_results
 from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage, preprocess_frames
 from ft_face_modular import load_face_detector, detect_faces, extract_face_rois, preprocess_faces
 from simple_fq_modularized import generate_vibraimages
@@ -27,8 +27,8 @@ def main():
         print("1. Simplified frequency analysis")
         print("2. FFT frequency analysis")
         print("3. FFT with face detection")
-        analysis_type = int(input("Choose you need simplified frequency analysis or fft frequency analysis or fft with face detection (1, 2, 3): "))
-
+        analysis_type = int(input(
+            "Choose you need simplified frequency analysis or fft frequency analysis or fft with face detection (1, 2, 3): "))
 
         print("Performing analysis...")
         if analysis_type == 1:
@@ -56,14 +56,23 @@ def main():
         else:
             print("Invalid analysis type!")
             exit()
+
         print("Analysis complete!")
         print("Extracting features...")
         amplitude_hist, frequency_hist = extract_features(amplitude_vibraimage, frequency_vibraimage)
         print("Features extracted!")
+
+        print("Would you like to save the results? (y/n)")
+        save_choice = input().strip().lower()
+        if save_choice == 'y':
+            output_prefix = input("Enter the prefix for the output files: ")
+            save_results(amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist, output_prefix)
+
         print("Visualizing results...")
         visualize_results(frames, amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist)
     else:
         print("No frames captured!")
+
 
 if __name__ == "__main__":
     main()
