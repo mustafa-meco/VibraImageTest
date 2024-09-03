@@ -83,7 +83,4 @@ python ft_face.py
 
 ![ft_face.py Output](Images/ft_face.png)
 
-## License
-
-This project is licensed under the MIT License.
 ```
