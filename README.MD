@@ -1,4 +1,4 @@
-```markdown
+
 # VibraImage Project
 
 This project demonstrates various techniques for generating and visualizing vibraimages using Python, OpenCV, and Matplotlib. The project includes three main scripts: `simple_fq.py`, `ft_main.py`, and `ft_face.py`.
@@ -12,7 +12,7 @@ This project demonstrates various techniques for generating and visualizing vibr
 
 Install the required packages using pip:
 
-``` sh
+```sh
 pip install opencv-python numpy matplotlib
 ```
 
@@ -83,4 +83,3 @@ python ft_face.py
 
 ![ft_face.py Output](Images/ft_face.png)
 
-```
