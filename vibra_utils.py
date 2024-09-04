@@ -216,3 +216,16 @@ def calculate_fft_frequency_amplitude(frames, Fin):
             frequency[x, y] = (dominant_frequency_index * Fin) / N
 
     return amplitude, frequency
+
+def preprocess_frames(frames):
+  """
+  Preprocesses frames by converting them to a 3D numpy array.
+
+  Args:
+      frames (list): List of grayscale frames.
+
+  Returns:
+      numpy.ndarray: 3D numpy array representing frames (time, height, width).
+  """
+  frames = np.array(frames, dtype=np.float32)
+  return frames

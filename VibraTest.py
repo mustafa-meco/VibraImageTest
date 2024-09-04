@@ -1,8 +1,5 @@
-from vibra_utils import capture_frames, extract_features, visualize_results, save_results, capture_frames_Fin, calculate_frequency, calculate_amplitude, calculate_fft_frequency_amplitude
-from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage, preprocess_frames
+from vibra_utils import extract_features, visualize_results, save_results, capture_frames_Fin, calculate_fft_frequency_amplitude, calculate_frequency, calculate_amplitude, preprocess_frames
 from ft_face_modular import load_face_detector, detect_faces, extract_face_rois, preprocess_faces
-from simple_fq_modularized import generate_vibraimages
-
 
 def main():
     print("Welcome to VibraTest!")
@@ -24,7 +21,6 @@ def main():
     print("Frames captured!")
 
     if frames:
-
         face_only = int(input("Do you want to detect faces only? (1, 0): "))
         if face_only == 1:
             face_cascade = load_face_detector()
@@ -42,12 +38,12 @@ def main():
 
         print("1. Literature frequency analysis")
         print("2. FFT frequency analysis")
-        analysis_type = int(input(
-            "Choose you need Literature frequency analysis or fft frequency analysis(1, 2): "))
+        analysis_type = int(input("Choose you need Literature frequency analysis or fft frequency analysis(1, 2): "))
 
         print("Performing analysis...")
         if analysis_type == 1:
-            amplitude_vibraimage, frequency_vibraimage = generate_vibraimages(frames, Fin)
+            amplitude_vibraimage = calculate_amplitude(frames)
+            frequency_vibraimage = calculate_frequency(frames, Fin)
         elif analysis_type == 2:
             frames = preprocess_frames(frames)
             amplitude_vibraimage, frequency_vibraimage = calculate_fft_frequency_amplitude(frames, Fin)
@@ -70,7 +66,6 @@ def main():
         visualize_results(frames, amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist)
     else:
         print("No frames captured!")
-
 
 if __name__ == "__main__":
     main()

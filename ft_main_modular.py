@@ -41,14 +41,14 @@ def generate_frequency_vibraimage(frames):
   Returns:
       numpy.ndarray: Frequency vibraimage.
   """
-  frequency_vibraimage = np.zeros_like(frames[0], dtype=np.float32)
-  for y in range(frames.shape[1]):
-    for x in range(frames.shape[2]):
-      pixel_time_series = frames[:, y, x]
-      fft_result = np.fft.fft(pixel_time_series)
-      frequencies = np.fft.fftfreq(len(pixel_time_series))
-      peak_frequency = np.abs(frequencies[np.argmax(np.abs(fft_result[1:])) + 1])
-      frequency_vibraimage[y, x] = peak_frequency
+  # frequency_vibraimage = np.zeros_like(frames[0], dtype=np.float32)
+  # for y in range(frames.shape[1]):
+  #   for x in range(frames.shape[2]):
+  #     pixel_time_series = frames[:, y, x]
+  #     fft_result = np.fft.fft(pixel_time_series)
+  #     frequencies = np.fft.fftfreq(len(pixel_time_series))
+  #     peak_frequency = np.abs(frequencies[np.argmax(np.abs(fft_result[1:])) + 1])
+  #     frequency_vibraimage[y, x] = peak_frequency
   return frequency_vibraimage
 
 
