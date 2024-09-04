@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85336089-2f85-448d-8fc7-42fcded04ae2" name="Changes" comment="Updated simple_fq calculations in modularized version">
+    <list default="true" id="85336089-2f85-448d-8fc7-42fcded04ae2" name="Changes" comment="Fixed Literature Vibra Calculations">
       <change afterPath="$PROJECT_DIR$/VibraTestGUI.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/fft_main_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VibraTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/VibraTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simple_fq_modularized.py" beforeDir="false" afterPath="$PROJECT_DIR$/simple_fq_modularized.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vibra_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/vibra_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +133,7 @@
       <updated>1725313330357</updated>
       <workItem from="1725313331723" duration="5403000" />
       <workItem from="1725372270575" duration="6690000" />
-      <workItem from="1725433888428" duration="3740000" />
+      <workItem from="1725433888428" duration="4796000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -191,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725437327539</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed Literature Vibra Calculations">
+      <option name="closed" value="true" />
+      <created>1725438137241</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1725438137241</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +213,8 @@
     <MESSAGE value="fine tweaks" />
     <MESSAGE value="Add result saving feature" />
     <MESSAGE value="Updated simple_fq calculations in modularized version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated simple_fq calculations in modularized version" />
+    <MESSAGE value="Fixed Literature Vibra Calculations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Literature Vibra Calculations" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/VibraImageTest$Real_Time_ft2.coverage" NAME="Real_Time_ft2 Coverage Results" MODIFIED="1725315406299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -220,7 +229,7 @@
     <SUITE FILE_PATH="coverage/VibraImageTest$aura.coverage" NAME="aura Coverage Results" MODIFIED="1725316870490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/VibraImageTest$Parallelized.coverage" NAME="Parallelized Coverage Results" MODIFIED="1725316194143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/VibraImageTest$ft_face_modular.coverage" NAME="ft_face_modular Coverage Results" MODIFIED="1725375329896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/VibraImageTest$VibraTest.coverage" NAME="VibraTest Coverage Results" MODIFIED="1725437679276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/VibraImageTest$VibraTest.coverage" NAME="VibraTest Coverage Results" MODIFIED="1725438600203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/VibraImageTest$fft_main_2.coverage" NAME="fft_main_2 Coverage Results" MODIFIED="1725437088566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/VibraImageTest$ft_main_modular.coverage" NAME="ft_main_modular Coverage Results" MODIFIED="1725372882650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/VibraImageTest$ft_main.coverage" NAME="ft_main Coverage Results" MODIFIED="1725436610493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

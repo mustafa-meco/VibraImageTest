@@ -1,4 +1,4 @@
-from vibra_utils import capture_frames, extract_features, visualize_results, save_results, capture_frames_Fin
+from vibra_utils import capture_frames, extract_features, visualize_results, save_results, capture_frames_Fin, calculate_frequency, calculate_amplitude, calculate_fft_frequency_amplitude
 from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage, preprocess_frames
 from ft_face_modular import load_face_detector, detect_faces, extract_face_rois, preprocess_faces
 from simple_fq_modularized import generate_vibraimages
@@ -48,11 +48,9 @@ def main():
         print("Performing analysis...")
         if analysis_type == 1:
             amplitude_vibraimage, frequency_vibraimage = generate_vibraimages(frames, Fin)
-
         elif analysis_type == 2:
             frames = preprocess_frames(frames)
-            amplitude_vibraimage = generate_amplitude_vibraimage(frames)
-            frequency_vibraimage = generate_frequency_vibraimage(frames)
+            amplitude_vibraimage, frequency_vibraimage = calculate_fft_frequency_amplitude(frames, Fin)
         else:
             print("Invalid analysis type!")
             exit()

@@ -184,3 +184,35 @@ def calculate_frequency(frames, Fin):
             frequency[x, y] = Fin * indicator_sum / (N - 1)
 
     return frequency
+
+
+def calculate_fft_frequency_amplitude(frames, Fin):
+    N = len(frames)  # Number of frames
+    height, width = frames[0].shape  # Dimensions of each frame
+
+    # Initialize the frequency and amplitude arrays with zeros
+    frequency = np.zeros((height, width))
+    amplitude = np.zeros((height, width))
+
+    # Calculate the frequency and amplitude components for each point (x, y)
+    for x in range(height):
+        for y in range(width):
+            # Extract the time series signal for point (x, y)
+            signal = np.array([frames[i][x, y] for i in range(N)])
+
+            # Apply FFT to the signal
+            fft_result = np.fft.fft(signal)
+
+            # Compute the magnitude (amplitude) of the FFT result
+            fft_magnitude = np.abs(fft_result)
+
+            # Sum the magnitudes (excluding the DC component) for the total amplitude
+            amplitude[x, y] = np.sum(fft_magnitude[1:N // 2])
+
+            # Find the dominant frequency (ignore the DC component at index 0)
+            dominant_frequency_index = np.argmax(fft_magnitude[1:N // 2]) + 1
+
+            # Calculate the corresponding frequency in Hz
+            frequency[x, y] = (dominant_frequency_index * Fin) / N
+
+    return amplitude, frequency
