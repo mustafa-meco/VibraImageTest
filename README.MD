@@ -114,3 +114,6 @@ This module contains utility functions for capturing frames, extracting features
 - `extract_features(amplitude_vibraimage, frequency_vibraimage)`: Extracts features (histograms) from vibraimages.
 - `visualize_results(frames, amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist)`: Visualizes frames, vibraimages, and histograms.
 
+
+## Refrences
+[Application of Vibraimage Technology and System for Analysis of Motor Activity and Study of Functional State of the Human Body](https://www.researchgate.net/publication/225137210_Application_of_vibraimage_technology_and_system_for_analysis_of_motor_activity_and_study_of_functional_state_of_the_human_body)
