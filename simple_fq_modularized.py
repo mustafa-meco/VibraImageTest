@@ -10,13 +10,9 @@ def generate_vibraimages(frames):
     Returns:
         tuple: Tuple containing amplitude and frequency vibraimages (numpy arrays).
     """
-    amplitude_vibraimage = np.zeros_like(frames[0], dtype=np.float32)
-    frequency_vibraimage = np.abs(frames[-1].astype(np.float32) - frames[0].astype(np.float32))
+    amplitude_vibraimage = calculate_amplitude(frames)
+    frequency_vibraimage = calculate_frequency()
 
-    for i in range(1, len(frames)):
-        amplitude_vibraimage += np.abs(frames[i].astype(np.float32) - frames[i - 1].astype(np.float32))
-
-    amplitude_vibraimage /= (len(frames) - 1)
     return amplitude_vibraimage, frequency_vibraimage
 
 

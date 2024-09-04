@@ -1,3 +1,5 @@
+from typing import Final
+
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -30,6 +32,35 @@ def capture_frames(video_path, num_frames=30):
     camera.release()
     cv2.destroyAllWindows()
     return frames
+
+def capture_frames_Fin(video_path, num_frames=30):
+    """
+    Captures frames from a video or camera.
+
+    Args:
+        video_path (str): Path to the video file or 0 for webcam.
+        num_frames (int, optional): Number of frames to capture. Defaults to 30.
+
+    Returns:
+        list: List of grayscale frames.
+    """
+    camera = cv2.VideoCapture(video_path)
+    Fin = camera.get(cv2.CAP_PROP_FPS)
+    if not camera.isOpened():
+        print("Error opening video/camera!")
+        return []
+
+    frames = []
+    for _ in range(num_frames):
+        ret, frame = camera.read()
+        if ret:
+            frames.append(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
+        else:
+            break
+
+    camera.release()
+    cv2.destroyAllWindows()
+    return frames, Fin
 
 def extract_features(amplitude_vibraimage, frequency_vibraimage):
     """
@@ -99,10 +130,6 @@ def save_results(amplitude_vibraimage, frequency_vibraimage, amplitude_hist, fre
     # if folder exist print warning
     if os.path.exists(f"saved_results/{output_prefix}"):
         print("Warning: Folder already exists. Files will be overwritten.")
-        agree = input("Do you want to continue? (y/n): ")
-        if agree.lower() != 'y':
-            print("Operation cancelled.")
-            return
 
     folder = f"saved_results/{output_prefix}"
 
@@ -115,3 +142,45 @@ def save_results(amplitude_vibraimage, frequency_vibraimage, amplitude_hist, fre
     np.save(f"{folder}/{output_prefix}_frequency_hist.npy", frequency_hist)
 
     print(f"Results saved with prefix '{output_prefix}'.")
+
+def calculate_amplitude(frames):
+    N = len(frames)  # Number of frames
+    height, width = frames[0].shape  # Dimensions of each frame
+
+    # Initialize the amplitude array with zeros
+    amplitude = np.zeros((height, width))
+
+    # Calculate the amplitude component for each point (x, y)
+    for x in range(height):
+        for y in range(width):
+            # Sum the absolute differences between consecutive frames
+            diff_sum = 0
+            for i in range(N - 1):
+                diff_sum += abs(frames[i][x, y] - frames[i + 1][x, y])
+
+            # Average the differences
+            amplitude[x, y] = diff_sum / (N - 1)
+
+    return amplitude
+
+# Frequency Vibraimage
+def calculate_frequency(frames, Fin):
+    N = len(frames)  # Number of frames
+    height, width = frames[0].shape  # Dimensions of each frame
+
+    # Initialize the frequency array with zeros
+    frequency = np.zeros((height, width))
+
+    # Calculate the frequency component for each point (x, y)
+    for x in range(height):
+        for y in range(width):
+            # Sum the indicator values for each consecutive frame difference
+            indicator_sum = 0
+            for i in range(N - 1):
+                if abs(frames[i][x, y] - frames[i + 1][x, y]) > 0:
+                    indicator_sum += 1
+
+            # Calculate the frequency component
+            frequency[x, y] = Fin * indicator_sum / (N - 1)
+
+    return frequency
