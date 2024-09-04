@@ -1,0 +1,276 @@
+Index: fft_main_2.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/fft_main_2.py b/fft_main_2.py
+new file mode 100644
+--- /dev/null	(date 1725437088553)
++++ b/fft_main_2.py	(date 1725437088553)
+@@ -0,0 +1,29 @@
++import cv2
++import numpy as np
++
++from vibra_utils import calculate_amplitude, calculate_frequency, extract_features, visualize_results, capture_frames_Fin
++
++
++# --- 1. Image Acquisition ---
++video_path = "Videos/00.mp4"  # Replace with your video path or 0 for webcam
++frames, Fin = capture_frames_Fin(video_path, num_frames=30)
++if not frames:
++    print("No frames captured!")
++    exit()
++
++# Convert frames to a 3D numpy array: (time, height, width)
++frames = np.array(frames, dtype=np.float32)
++
++# --- 3. Vibraimage Generation ---
++# Amplitude Vibraimage (Eq. 1 from source)
++amplitude_vibraimage = calculate_amplitude(frames)
++
++# Frequency Vibraimage
++frequency_vibraimage = calculate_frequency(frames, Fin)
++
++# --- 4. Feature Extraction & Analysis ---
++# Example: Histograms
++amplitude_hist, frequency_hist = extract_features(amplitude_vibraimage, frequency_vibraimage)
++
++# --- 5. Visualization ---
++visualize_results(frames, amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"85336089-2f85-448d-8fc7-42fcded04ae2\" name=\"Changes\" comment=\"fine tweaks\">\r\n      <change beforePath=\"$PROJECT_DIR$/VibraTest.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/VibraTest.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/vibra_utils.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/vibra_utils.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;mustafa-meco&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/mustafa-meco/VibraImageTest&quot;,\r\n    &quot;accountId&quot;: &quot;870b8004-a686-46c7-8fcb-1ce8868a2a11&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2lX4x9Yn0tVuPS6bnsPbKx0OCmi\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Python.Parallelized.executor\": \"Run\",\r\n    \"Python.Real_Time_ft.executor\": \"Run\",\r\n    \"Python.Real_Time_ft2.executor\": \"Run\",\r\n    \"Python.Real_Time_ft_face.executor\": \"Run\",\r\n    \"Python.VibraTest.executor\": \"Run\",\r\n    \"Python.aura.executor\": \"Run\",\r\n    \"Python.ft_face.executor\": \"Run\",\r\n    \"Python.ft_face_modular.executor\": \"Run\",\r\n    \"Python.ft_main.executor\": \"Run\",\r\n    \"Python.ft_main_modular.executor\": \"Run\",\r\n    \"Python.main.executor\": \"Run\",\r\n    \"Python.main2.executor\": \"Run\",\r\n    \"Python.simple_fq.executor\": \"Run\",\r\n    \"Python.simple_fq_modularized.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"last_opened_file_path\": \"D:/Programming/Python/VibraImageTest/Images\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Programming\\Python\\VibraImageTest\\Images\" />\r\n      <recent name=\"D:\\Programming\\Python\\VibraImageTest\\Videos\" />\r\n      <recent name=\"D:\\Programming\\Python\\VibraImageTest\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\Programming\\Python\\VibraImageTest\\Images\" />\r\n      <recent name=\"D:\\Programming\\Python\\VibraImageTest\\Images\\simple_fq\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"simple_fq1\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"VibraImageTest\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"D:\\Programming\\Python\\VibraImageTest\\simple_fq1.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-PY-242.21829.153\" />\r\n        <option value=\"bundled-python-sdk-464836ebc622-b74155a9e76b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.21829.153\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"85336089-2f85-448d-8fc7-42fcded04ae2\" name=\"Changes\" comment=\"\" />\r\n      <created>1725313330357</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1725313330357</updated>\r\n      <workItem from=\"1725313331723\" duration=\"5403000\" />\r\n      <workItem from=\"1725372270575\" duration=\"4265000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"First Commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1725317955907</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1725317955907</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Modulare Code\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1725373747363</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1725373747363</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Docummented Modularized Version\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1725374480960</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1725374480960</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Made a terminal Test for whole system\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1725376107016</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1725376107016</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"fine tweaks\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1725376186654</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1725376186654</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"First Commit\" />\r\n    <MESSAGE value=\"Modulare Code\" />\r\n    <MESSAGE value=\"Docummented Modularized Version\" />\r\n    <MESSAGE value=\"Made a terminal Test for whole system\" />\r\n    <MESSAGE value=\"fine tweaks\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fine tweaks\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$Real_Time_ft2.coverage\" NAME=\"Real_Time_ft2 Coverage Results\" MODIFIED=\"1725315406299\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$simple_fq_modularized.coverage\" NAME=\"simple_fq_modularized Coverage Results\" MODIFIED=\"1725373934483\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$main2.coverage\" NAME=\"main2 Coverage Results\" MODIFIED=\"1725316070192\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$Real_Time_ft_face.coverage\" NAME=\"Real_Time_ft_face Coverage Results\" MODIFIED=\"1725315649811\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$ft_face.coverage\" NAME=\"ft_face Coverage Results\" MODIFIED=\"1725317503138\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$main.coverage\" NAME=\"main Coverage Results\" MODIFIED=\"1725316058137\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$simple_fq.coverage\" NAME=\"simple_fq Coverage Results\" MODIFIED=\"1725317593654\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$aura.coverage\" NAME=\"aura Coverage Results\" MODIFIED=\"1725316870490\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$Parallelized.coverage\" NAME=\"Parallelized Coverage Results\" MODIFIED=\"1725316194143\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$ft_face_modular.coverage\" NAME=\"ft_face_modular Coverage Results\" MODIFIED=\"1725375329896\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$VibraTest.coverage\" NAME=\"VibraTest Coverage Results\" MODIFIED=\"1725376467530\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$ft_main_modular.coverage\" NAME=\"ft_main_modular Coverage Results\" MODIFIED=\"1725372882650\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$ft_main.coverage\" NAME=\"ft_main Coverage Results\" MODIFIED=\"1725317413420\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/VibraImageTest$Real_Time_ft.coverage\" NAME=\"Real_Time_ft Coverage Results\" MODIFIED=\"1725315287925\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 15895815e61716883987e7682fd153049abad975)
++++ b/.idea/workspace.xml	(date 1725437041416)
+@@ -4,8 +4,12 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="85336089-2f85-448d-8fc7-42fcded04ae2" name="Changes" comment="fine tweaks">
+-      <change beforePath="$PROJECT_DIR$/VibraTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/VibraTest.py" afterDir="false" />
++    <list default="true" id="85336089-2f85-448d-8fc7-42fcded04ae2" name="Changes" comment="Add result saving feature">
++      <change afterPath="$PROJECT_DIR$/VibraTestGUI.py" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/build/.gitignore" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/fft_main_2.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/simple_fq_modularized.py" beforeDir="false" afterPath="$PROJECT_DIR$/simple_fq_modularized.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/vibra_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/vibra_utils.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -51,7 +55,9 @@
+     "Python.Real_Time_ft2.executor": "Run",
+     "Python.Real_Time_ft_face.executor": "Run",
+     "Python.VibraTest.executor": "Run",
++    "Python.VibraTestGUI.executor": "Run",
+     "Python.aura.executor": "Run",
++    "Python.fft_main_2.executor": "Run",
+     "Python.ft_face.executor": "Run",
+     "Python.ft_face_modular.executor": "Run",
+     "Python.ft_main.executor": "Run",
+@@ -60,9 +66,10 @@
+     "Python.main2.executor": "Run",
+     "Python.simple_fq.executor": "Run",
+     "Python.simple_fq_modularized.executor": "Run",
++    "Python.vibra_utils.executor": "Run",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "git-widget-placeholder": "master",
+-    "last_opened_file_path": "D:/Programming/Python/VibraImageTest/Images",
++    "last_opened_file_path": "D:/Programming/Python/VibraImageTest/saved_results",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -73,6 +80,8 @@
+ }]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="D:\Programming\Python\VibraImageTest\saved_results" />
++      <recent name="D:\Programming\Python\VibraImageTest\dist" />
+       <recent name="D:\Programming\Python\VibraImageTest\Images" />
+       <recent name="D:\Programming\Python\VibraImageTest\Videos" />
+       <recent name="D:\Programming\Python\VibraImageTest" />
+@@ -124,7 +133,8 @@
+       <option name="presentableId" value="Default" />
+       <updated>1725313330357</updated>
+       <workItem from="1725313331723" duration="5403000" />
+-      <workItem from="1725372270575" duration="4265000" />
++      <workItem from="1725372270575" duration="6690000" />
++      <workItem from="1725433888428" duration="3063000" />
+     </task>
+     <task id="LOCAL-00001" summary="First Commit">
+       <option name="closed" value="true" />
+@@ -166,7 +176,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1725376186654</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="Add result saving feature">
++      <option name="closed" value="true" />
++      <created>1725376809817</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1725376809817</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -178,22 +196,26 @@
+     <MESSAGE value="Docummented Modularized Version" />
+     <MESSAGE value="Made a terminal Test for whole system" />
+     <MESSAGE value="fine tweaks" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fine tweaks" />
++    <MESSAGE value="Add result saving feature" />
++    <option name="LAST_COMMIT_MESSAGE" value="Add result saving feature" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+     <SUITE FILE_PATH="coverage/VibraImageTest$Real_Time_ft2.coverage" NAME="Real_Time_ft2 Coverage Results" MODIFIED="1725315406299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-    <SUITE FILE_PATH="coverage/VibraImageTest$simple_fq_modularized.coverage" NAME="simple_fq_modularized Coverage Results" MODIFIED="1725373934483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/VibraImageTest$simple_fq_modularized.coverage" NAME="simple_fq_modularized Coverage Results" MODIFIED="1725435163510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1725316070192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$Real_Time_ft_face.coverage" NAME="Real_Time_ft_face Coverage Results" MODIFIED="1725315649811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$ft_face.coverage" NAME="ft_face Coverage Results" MODIFIED="1725317503138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$main.coverage" NAME="main Coverage Results" MODIFIED="1725316058137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$simple_fq.coverage" NAME="simple_fq Coverage Results" MODIFIED="1725317593654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/VibraImageTest$vibra_utils.coverage" NAME="vibra_utils Coverage Results" MODIFIED="1725377124191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/VibraImageTest$VibraTestGUI.coverage" NAME="VibraTestGUI Coverage Results" MODIFIED="1725377137203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$aura.coverage" NAME="aura Coverage Results" MODIFIED="1725316870490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$Parallelized.coverage" NAME="Parallelized Coverage Results" MODIFIED="1725316194143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$ft_face_modular.coverage" NAME="ft_face_modular Coverage Results" MODIFIED="1725375329896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$VibraTest.coverage" NAME="VibraTest Coverage Results" MODIFIED="1725376467530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/VibraImageTest$fft_main_2.coverage" NAME="fft_main_2 Coverage Results" MODIFIED="1725437026075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$ft_main_modular.coverage" NAME="ft_main_modular Coverage Results" MODIFIED="1725372882650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-    <SUITE FILE_PATH="coverage/VibraImageTest$ft_main.coverage" NAME="ft_main Coverage Results" MODIFIED="1725317413420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/VibraImageTest$ft_main.coverage" NAME="ft_main Coverage Results" MODIFIED="1725436610493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/VibraImageTest$Real_Time_ft.coverage" NAME="Real_Time_ft Coverage Results" MODIFIED="1725315287925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: VibraTestGUI.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VibraTestGUI.py b/VibraTestGUI.py
+new file mode 100644
+--- /dev/null	(date 1725376954355)
++++ b/VibraTestGUI.py	(date 1725376954355)
+@@ -0,0 +1,113 @@
++import tkinter as tk
++from tkinter import filedialog, messagebox
++from vibra_utils import capture_frames, extract_features, visualize_results, save_results
++from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage, preprocess_frames
++from ft_face_modular import load_face_detector, detect_faces, extract_face_rois, preprocess_faces
++from simple_fq_modularized import generate_vibraimages
++
++
++class VibraTestApp:
++    def __init__(self, root):
++        self.root = root
++        self.root.title("VibraTest")
++        self.video_path = None
++
++        # Create Widgets
++        self.label = tk.Label(root, text="VibraTest - Vibration Analysis Tool", font=("Arial", 16))
++        self.label.pack(pady=10)
++
++        self.file_button = tk.Button(root, text="Select Video File", command=self.select_file)
++        self.file_button.pack(pady=5)
++
++        self.camera_button = tk.Button(root, text="Use Camera", command=self.use_camera)
++        self.camera_button.pack(pady=5)
++
++        self.num_frames_label = tk.Label(root, text="Number of Frames:")
++        self.num_frames_label.pack(pady=5)
++
++        self.num_frames_entry = tk.Entry(root)
++        self.num_frames_entry.pack(pady=5)
++        self.num_frames_entry.insert(0, "30")
++
++        self.analysis_label = tk.Label(root, text="Choose Analysis Type:")
++        self.analysis_label.pack(pady=5)
++
++        self.analysis_type = tk.IntVar()
++        self.analysis_type.set(1)
++        self.simplified_radio = tk.Radiobutton(root, text="Simplified Frequency Analysis", variable=self.analysis_type,
++                                               value=1)
++        self.simplified_radio.pack(anchor=tk.W)
++
++        self.fft_radio = tk.Radiobutton(root, text="FFT Frequency Analysis", variable=self.analysis_type, value=2)
++        self.fft_radio.pack(anchor=tk.W)
++
++        self.fft_face_radio = tk.Radiobutton(root, text="FFT with Face Detection", variable=self.analysis_type, value=3)
++        self.fft_face_radio.pack(anchor=tk.W)
++
++        self.start_button = tk.Button(root, text="Start Analysis", command=self.start_analysis)
++        self.start_button.pack(pady=10)
++
++        self.save_checkbox_var = tk.IntVar()
++        self.save_checkbox = tk.Checkbutton(root, text="Save Results", variable=self.save_checkbox_var)
++        self.save_checkbox.pack(pady=5)
++
++        self.output_prefix_label = tk.Label(root, text="Output File Prefix (Optional):")
++        self.output_prefix_label.pack(pady=5)
++
++        self.output_prefix_entry = tk.Entry(root)
++        self.output_prefix_entry.pack(pady=5)
++
++    def select_file(self):
++        self.video_path = filedialog.askopenfilename(title="Select Video File",
++                                                     filetypes=(("MP4 files", "*.mp4"), ("All files", "*.*")))
++        if self.video_path:
++            messagebox.showinfo("Selected File", f"Selected Video: {self.video_path}")
++
++    def use_camera(self):
++        self.video_path = 0
++        messagebox.showinfo("Camera Selected", "Camera will be used for capturing frames.")
++
++    def start_analysis(self):
++        num_frames = int(self.num_frames_entry.get())
++        frames = capture_frames(self.video_path, num_frames=num_frames)
++
++        if not frames:
++            messagebox.showerror("Error", "No frames captured!")
++            return
++
++        analysis_type = self.analysis_type.get()
++        if analysis_type == 1:
++            amplitude_vibraimage, frequency_vibraimage = generate_vibraimages(frames)
++        elif analysis_type == 2:
++            frames = preprocess_frames(frames)
++            amplitude_vibraimage = generate_amplitude_vibraimage(frames)
++            frequency_vibraimage = generate_frequency_vibraimage(frames)
++        elif analysis_type == 3:
++            face_cascade = load_face_detector()
++            face_frames = []
++            for frame in frames:
++                faces = detect_faces(frame, face_cascade)
++                if len(faces) > 0:
++                    face_roi = extract_face_rois([frame], faces)[0]
++                    face_frames.append(face_roi)
++            preprocessed_frames = preprocess_faces(face_frames)
++            if len(preprocessed_frames) == 0:
++                messagebox.showerror("Error", "No faces detected after preprocessing!")
++                return
++            amplitude_vibraimage = generate_amplitude_vibraimage(preprocessed_frames)
++            frequency_vibraimage = generate_frequency_vibraimage(preprocessed_frames)
++
++        amplitude_hist, frequency_hist = extract_features(amplitude_vibraimage, frequency_vibraimage)
++
++        if self.save_checkbox_var.get():
++            output_prefix = self.output_prefix_entry.get() or "output"
++            save_results(amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist, output_prefix)
++            messagebox.showinfo("Saved", f"Results saved with prefix '{output_prefix}'")
++
++        visualize_results(frames, amplitude_vibraimage, frequency_vibraimage, amplitude_hist, frequency_hist)
++
++
++if __name__ == "__main__":
++    root = tk.Tk()
++    app = VibraTestApp(root)
++    root.mainloop()

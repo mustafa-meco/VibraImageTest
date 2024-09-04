@@ -1,4 +1,4 @@
-from vibra_utils import capture_frames, extract_features, visualize_results, save_results
+from vibra_utils import capture_frames, extract_features, visualize_results, save_results, capture_frames_Fin
 from ft_main_modular import generate_amplitude_vibraimage, generate_frequency_vibraimage, preprocess_frames
 from ft_face_modular import load_face_detector, detect_faces, extract_face_rois, preprocess_faces
 from simple_fq_modularized import generate_vibraimages
@@ -20,26 +20,13 @@ def main():
 
     num_frames = int(input("Enter the number of frames: "))
     print("Capturing frames...")
-    frames = capture_frames(video_path, num_frames=num_frames)
+    frames, Fin = capture_frames_Fin(video_path, num_frames=num_frames)
     print("Frames captured!")
 
     if frames:
-        print("1. Simplified frequency analysis")
-        print("2. FFT frequency analysis")
-        print("3. FFT with face detection")
-        analysis_type = int(input(
-            "Choose you need simplified frequency analysis or fft frequency analysis or fft with face detection (1, 2, 3): "))
 
-        print("Performing analysis...")
-        if analysis_type == 1:
-            amplitude_vibraimage, frequency_vibraimage = generate_vibraimages(frames)
-
-        elif analysis_type == 2:
-            frames = preprocess_frames(frames)
-            amplitude_vibraimage = generate_amplitude_vibraimage(frames)
-            frequency_vibraimage = generate_frequency_vibraimage(frames)
-
-        elif analysis_type == 3:
+        face_only = int(input("Do you want to detect faces only? (1, 0): "))
+        if face_only == 1:
             face_cascade = load_face_detector()
             face_frames = []
             for frame in frames:
@@ -51,8 +38,21 @@ def main():
             if len(preprocessed_frames) == 0:
                 print("No faces detected after preprocessing!")
                 exit()
-            amplitude_vibraimage = generate_amplitude_vibraimage(preprocessed_frames)
-            frequency_vibraimage = generate_frequency_vibraimage(preprocessed_frames)
+            frames = preprocessed_frames
+
+        print("1. Literature frequency analysis")
+        print("2. FFT frequency analysis")
+        analysis_type = int(input(
+            "Choose you need Literature frequency analysis or fft frequency analysis(1, 2): "))
+
+        print("Performing analysis...")
+        if analysis_type == 1:
+            amplitude_vibraimage, frequency_vibraimage = generate_vibraimages(frames, Fin)
+
+        elif analysis_type == 2:
+            frames = preprocess_frames(frames)
+            amplitude_vibraimage = generate_amplitude_vibraimage(frames)
+            frequency_vibraimage = generate_frequency_vibraimage(frames)
         else:
             print("Invalid analysis type!")
             exit()

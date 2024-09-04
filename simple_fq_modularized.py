@@ -1,6 +1,6 @@
 from vibra_utils import *
 
-def generate_vibraimages(frames):
+def generate_vibraimages(frames, Fin=30):
     """
     Generates amplitude and frequency vibraimages from a list of frames.
 
@@ -11,7 +11,7 @@ def generate_vibraimages(frames):
         tuple: Tuple containing amplitude and frequency vibraimages (numpy arrays).
     """
     amplitude_vibraimage = calculate_amplitude(frames)
-    frequency_vibraimage = calculate_frequency()
+    frequency_vibraimage = calculate_frequency(frames, Fin)
 
     return amplitude_vibraimage, frequency_vibraimage
 
